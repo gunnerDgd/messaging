@@ -1,0 +1,3 @@
+﻿  details_route_endpoint.c
+E:\Programming\C++\Projects\Experimental\synapse-messaging\source\route\details\details_route_endpoint.c(43,61): warning C4047: '=': 'HANDLE' differs in levels of indirection from 'uintptr_t'
+  synapse-messaging-route.vcxproj -> E:\Programming\C++\Projects\Experimental\synapse-messaging\libs\x64\debug\synapse-messaging-route.lib

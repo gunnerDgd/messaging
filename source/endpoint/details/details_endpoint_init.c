@@ -11,8 +11,8 @@ __synapse_messaging_endpoint*
 
 	__synapse_messaging_endpoint*
 		ptr_endpoint
-		= pMman->block_pointer
-				(hnd_block);
+			= pMman->block_pointer
+					(hnd_block);
 
 	ptr_endpoint->ep_hnd_mblock
 		= hnd_block;

@@ -78,6 +78,10 @@ synapse_messaging_dll
 		synapse_send_message
 			(synapse_messaging_endpoint pEndpoint, uint16_t pOpcode, void* pDataField, size_t pDataSize)
 {
+	if(!synapse_messaging_opaque_handle_reference
+			(pEndpoint))
+				return;
+
 	synapse_messaging_endpoint_send_to
 		(__synapse_messaging_route_object, pEndpoint, pOpcode, pDataField, pDataSize);
 }
@@ -87,6 +91,15 @@ synapse_messaging_dll
 		synapse_receive_message
 			(synapse_messaging_endpoint pEndpoint)
 {
+	if(!synapse_messaging_opaque_handle_reference
+			(pEndpoint)) {
+		synapse_messaging_opaque_handle_init
+			(synapse_messaging_message, hnd_error, NULL);
+
+		return
+			hnd_error;
+	};
+
 	return
 		synapse_messaging_endpoint_receive_from
 			(__synapse_messaging_route_object, pEndpoint);

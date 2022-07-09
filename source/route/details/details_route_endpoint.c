@@ -3,8 +3,10 @@
 #include <messaging/endpoint/details/endpoint_init.h>
 #include <messaging/message/details/message_init.h>
 
+#include <memory/defines/alloc.h>
 #include <memory/mman/standard_heap/stdheap.h>
 
+#include <stdio.h>
 #include <process.h>
 
 __synapse_messaging_route_endpoint*
@@ -30,9 +32,17 @@ __synapse_messaging_route_endpoint*
 				(pRoute->rt_handle, &ptr_endpoint, sizeof(__synapse_messaging_route_endpoint*));
 
 	ptr_endpoint->rt_endpoint_identifier
-		= pEndpointName;
+		= synapse_memory_default_alloc
+				(NULL, strlen(pEndpointName) + 1);
 	ptr_endpoint->rt_endpoint_identifier_length
 		= strlen(pEndpointName);
+	memset
+		(ptr_endpoint->rt_endpoint_identifier,
+			0x00, ptr_endpoint->rt_endpoint_identifier_length + 1);
+	memcpy
+		(ptr_endpoint->rt_endpoint_identifier,
+				pEndpointName, 
+					ptr_endpoint->rt_endpoint_identifier_length);
 
 	ptr_endpoint->rt_endpoint_mblock
 		= hnd_endpoint_route_mblock;
@@ -57,6 +67,10 @@ void
 		(pEndpoint->rt_endpoint_thread, INFINITE);
 	CloseHandle
 		(pEndpoint->rt_endpoint_thread);
+
+	synapse_memory_default_dealloc
+		(pEndpoint->rt_endpoint_identifier, 
+			pEndpoint->rt_endpoint_identifier_length);
 
 	__synapse_messaging_endpoint_cleanup
 		(pEndpoint->rt_endpoint);

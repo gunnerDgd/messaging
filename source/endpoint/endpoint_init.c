@@ -2,7 +2,7 @@
 #include <messaging/route/details/route_endpoint.h>
 
 #include <memory/mman/standard_heap/stdheap.h>
-
+#include <stdio.h>
 synapse_messaging_endpoint
 	synapse_messaging_endpoint_initialize
 		(synapse_messaging_route pRoute, 

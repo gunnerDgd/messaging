@@ -1,4 +1,5 @@
-﻿  endpoint_init.c
-  details_route_endpoint.c
-  Generating Code...
+﻿  details_route_endpoint.c
+E:\Programming\C++\Projects\Experimental\synapse-messaging\source\route\details\details_route_endpoint.c(40,40): warning C4090: 'function': different 'const' qualifiers
+E:\Programming\C++\Projects\Experimental\synapse-messaging\source\route\details\details_route_endpoint.c(43,40): warning C4090: 'function': different 'const' qualifiers
+E:\Programming\C++\Projects\Experimental\synapse-messaging\source\route\details\details_route_endpoint.c(73,1): warning C4090: 'function': different 'const' qualifiers
   synapse-messaging-route.vcxproj -> E:\Programming\C++\Projects\Experimental\synapse-messaging\libs\x64\debug\synapse-messaging-route.lib

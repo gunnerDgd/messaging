@@ -1,4 +1,2 @@
-﻿  messaging.c
-  LINK : E:\Programming\C++\Projects\synapse\bin\x64\synapse-messaging-dll.dll not found or not built by the last incremental link; performing full link
-     Creating library E:\Programming\C++\Projects\synapse\bin\x64\synapse-messaging-dll.lib and object E:\Programming\C++\Projects\synapse\bin\x64\synapse-messaging-dll.exp
+﻿     Creating library E:\Programming\C++\Projects\synapse\bin\x64\synapse-messaging-dll.lib and object E:\Programming\C++\Projects\synapse\bin\x64\synapse-messaging-dll.exp
   synapse-messaging-dll.vcxproj -> E:\Programming\C++\Projects\synapse\bin\x64\synapse-messaging-dll.dll

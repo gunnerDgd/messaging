@@ -82,7 +82,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>E:\Programming\C++\Projects\Experimental\synapse-messaging\include;$(IncludePath)</IncludePath>
     <LibraryPath>E:\Programming\C++\Projects\Experimental\synapse-messaging\bin\x64\debug;$(LibraryPath)</LibraryPath>
-    <OutDir>E:\Programming\C++\Projects\Experimental\synapse-messaging\bin\x64\debug\</OutDir>
+    <OutDir>E:\Programming\C++\Projects\synapse\bin\x64\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -3,6 +3,9 @@
 
 namespace synapse::messaging {
 	
+	void initialize();
+	void cleanup   ();
+
 	struct message_format_type {};
 	class  message
 	{

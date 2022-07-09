@@ -3,7 +3,7 @@
 
 synapse_messaging_endpoint
 	synapse_messaging_endpoint_initialize
-		(synapse_messaging_route, const char*, void(*)(void*), void*);
+		(synapse_messaging_route, const char*);
 
 void
 	synapse_messaging_endpoint_cleanup

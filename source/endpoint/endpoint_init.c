@@ -6,16 +6,13 @@
 synapse_messaging_endpoint
 	synapse_messaging_endpoint_initialize
 		(synapse_messaging_route pRoute, 
-		 const char*			 pEndpointName, 
-		 void				   (*pEndpointRoutine)(void*), 
-		 void*					 pEndpointRoutineParam)
+		 const char*			 pEndpointName)
 {
 	synapse_messaging_opaque_handle_init
 		(synapse_messaging_endpoint, hnd_endpoint,
 			__synapse_messaging_route_create_endpoint
 					(synapse_messaging_opaque_handle_reference
-						(pRoute),
-						pEndpointName, pEndpointRoutine, pEndpointRoutineParam));
+						(pRoute), pEndpointName));
 
 	return
 		hnd_endpoint;

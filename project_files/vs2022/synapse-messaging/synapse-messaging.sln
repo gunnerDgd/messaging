@@ -12,6 +12,13 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "synapse-messaging-route", "synapse-messaging-route\synapse-messaging-route.vcxproj", "{BAEDB0E4-ED03-4ED8-A460-310A1D84B661}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "synapse-messaging-dll", "synapse-messaging-dll\synapse-messaging-dll.vcxproj", "{4AF80790-E75B-41F0-A891-ECF6EF65415C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{19D82191-B515-487C-AED9-139063778722} = {19D82191-B515-487C-AED9-139063778722}
+		{609C7521-FED8-47A9-B6BA-8CE67A3DD997} = {609C7521-FED8-47A9-B6BA-8CE67A3DD997}
+		{BAEDB0E4-ED03-4ED8-A460-310A1D84B661} = {BAEDB0E4-ED03-4ED8-A460-310A1D84B661}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "synapse-messaging-cpp", "synapse-messaging-cpp\synapse-messaging-cpp.vcxproj", "{0C559A03-4448-4519-A226-F257AA3259D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +68,14 @@ Global
 		{4AF80790-E75B-41F0-A891-ECF6EF65415C}.Release|x64.Build.0 = Release|x64
 		{4AF80790-E75B-41F0-A891-ECF6EF65415C}.Release|x86.ActiveCfg = Release|Win32
 		{4AF80790-E75B-41F0-A891-ECF6EF65415C}.Release|x86.Build.0 = Release|Win32
+		{0C559A03-4448-4519-A226-F257AA3259D0}.Debug|x64.ActiveCfg = Debug|x64
+		{0C559A03-4448-4519-A226-F257AA3259D0}.Debug|x64.Build.0 = Debug|x64
+		{0C559A03-4448-4519-A226-F257AA3259D0}.Debug|x86.ActiveCfg = Debug|Win32
+		{0C559A03-4448-4519-A226-F257AA3259D0}.Debug|x86.Build.0 = Debug|Win32
+		{0C559A03-4448-4519-A226-F257AA3259D0}.Release|x64.ActiveCfg = Release|x64
+		{0C559A03-4448-4519-A226-F257AA3259D0}.Release|x64.Build.0 = Release|x64
+		{0C559A03-4448-4519-A226-F257AA3259D0}.Release|x86.ActiveCfg = Release|Win32
+		{0C559A03-4448-4519-A226-F257AA3259D0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

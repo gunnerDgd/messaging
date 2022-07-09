@@ -47,11 +47,11 @@ synapse_messaging_dll
 synapse_messaging_dll
 	synapse_messaging_endpoint
 		synapse_create_messaging_endpoint
-			(const char* pName, void(*pRoutine)(void*), void* pRoutineParameter)
+			(const char* pName)
 {
 	return
 		synapse_messaging_endpoint_initialize
-			(__synapse_messaging_route_object, pName, pRoutine, pRoutineParameter);
+			(__synapse_messaging_route_object, pName);
 }
 
 synapse_messaging_dll
@@ -93,6 +93,16 @@ synapse_messaging_dll
 }
 
 synapse_messaging_dll
+	void
+		synapse_expire_message
+			(synapse_messaging_message pMessage)
+{
+	synapse_messaging_endpoint_expire_message
+		(__synapse_messaging_route_object,
+			pMessage);
+}
+
+synapse_messaging_dll
 	void*
 		synapse_message_data
 			(synapse_messaging_message pMessage)
@@ -110,4 +120,14 @@ synapse_messaging_dll
 	return
 		((__synapse_messaging_message*)pMessage.opaque)
 			->msg_field_size;
+}
+
+synapse_messaging_dll
+	uint16_t
+		synapse_message_opcode
+			(synapse_messaging_message pMessage)
+{
+	return
+		((__synapse_messaging_message*)pMessage.opaque)
+			->msg_opcode;
 }

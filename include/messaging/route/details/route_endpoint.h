@@ -3,7 +3,7 @@
 
 __synapse_messaging_route_endpoint*
 	__synapse_messaging_route_create_endpoint
-		(__synapse_messaging_route*, const char*, void(*)(void*), void*);
+		(__synapse_messaging_route*, const char*);
 
 void
 	__synapse_messaging_route_delete_endpoint

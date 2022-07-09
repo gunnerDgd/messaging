@@ -15,7 +15,7 @@ synapse_messaging_dll
 synapse_messaging_dll
 	synapse_messaging_endpoint
 		synapse_create_messaging_endpoint
-			(const char*, void(*)(void*), void*);
+			(const char*);
 
 synapse_messaging_dll
 	void
@@ -38,6 +38,11 @@ synapse_messaging_dll
 			(synapse_messaging_endpoint);
 
 synapse_messaging_dll
+	void
+		synapse_expire_message
+			(synapse_messaging_message);
+
+synapse_messaging_dll
 	void*
 		synapse_message_data
 			(synapse_messaging_message);
@@ -45,4 +50,9 @@ synapse_messaging_dll
 synapse_messaging_dll
 	size_t
 		synapse_message_size
+			(synapse_messaging_message);
+
+synapse_messaging_dll
+	uint16_t
+		synapse_message_opcode
 			(synapse_messaging_message);

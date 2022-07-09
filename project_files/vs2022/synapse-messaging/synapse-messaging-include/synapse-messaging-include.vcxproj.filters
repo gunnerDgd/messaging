@@ -25,6 +25,12 @@
     <Filter Include="Header Files\defines\export">
       <UniqueIdentifier>{20e229ba-57d7-45c0-a8a3-c6af8bb4dec8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\interface\format">
+      <UniqueIdentifier>{755d56ba-40bd-4396-951f-4b02b620019b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\interface\format\kernel">
+      <UniqueIdentifier>{63b3432c-be92-414d-ae26-2f6c12f05600}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\include\messaging\defines\handle\opaque.h">
@@ -35,6 +41,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\include\messaging\defines\export\export.h">
       <Filter>Header Files\defines\export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\include\messaging\interface\opcode.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\include\messaging\interface\format\kernel\format.h">
+      <Filter>Header Files\interface\format\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\include\messaging\interface\format\kernel\format_modules.h">
+      <Filter>Header Files\interface\format\kernel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,10 +9,7 @@
 
 __synapse_messaging_route_endpoint*
 	__synapse_messaging_route_create_endpoint
-		(__synapse_messaging_route * pRoute,
-		 const char*				 pEndpointName, 
-		 void					   (*pEndpointRoutine)(void*), 
-		 void*					 	 pEndpointRoutineParam)
+		(__synapse_messaging_route * pRoute, const char* pEndpointName)
 {
 	synapse_memory_mman_block
 		hnd_endpoint_route_mblock
@@ -39,8 +36,10 @@ __synapse_messaging_route_endpoint*
 
 	ptr_endpoint->rt_endpoint_mblock
 		= hnd_endpoint_route_mblock;
-	ptr_endpoint->rt_endpoint_thread
-		= _beginthread(pEndpointRoutine, 0, pEndpointRoutineParam);
+	DuplicateHandle
+		(GetCurrentProcess(), GetCurrentThread (),
+			GetCurrentProcess(), &ptr_endpoint->rt_endpoint_thread,
+				0, TRUE, DUPLICATE_SAME_ACCESS);
 
 	return
 		ptr_endpoint;

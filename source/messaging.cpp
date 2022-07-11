@@ -1,13 +1,5 @@
 #include <messaging/messaging.hpp>
 
-void synapse::messaging::initialize()
-{
-	synapse_messaging_initialize_system();
-}
-void synapse::messaging::cleanup()
-{
-	synapse_messaging_cleanup_system();
-}
 
 synapse::messaging::message::message
 	(synapse_messaging_message pHandle)

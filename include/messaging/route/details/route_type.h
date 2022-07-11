@@ -12,6 +12,8 @@ typedef struct
 		rt_endpoint;
 	HANDLE
 		rt_endpoint_thread;
+	DWORD
+		rt_endpoint_thread_id;
 
 	const char*
 		rt_endpoint_identifier;

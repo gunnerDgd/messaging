@@ -45,10 +45,14 @@ void
 						synapse_structure_double_linked_node_data
 							(ptr_terminate);
 
-		WaitForSingleObject
-			(ptr_endpoint->rt_endpoint_thread, INFINITE);
-		CloseHandle
-			(ptr_endpoint->rt_endpoint_thread);
+		if (GetCurrentThreadId()
+					!= ptr_endpoint->rt_endpoint_thread_id)
+		{
+			WaitForSingleObject
+				(ptr_endpoint->rt_endpoint_thread, INFINITE);
+			CloseHandle
+				(ptr_endpoint->rt_endpoint_thread);
+		}
 	}
 
 	synapse_structure_double_linked_cleanup

@@ -50,6 +50,8 @@ __synapse_messaging_route_endpoint*
 		(GetCurrentProcess(), GetCurrentThread (),
 			GetCurrentProcess(), &ptr_endpoint->rt_endpoint_thread,
 				0, TRUE, DUPLICATE_SAME_ACCESS);
+	ptr_endpoint->rt_endpoint_thread_id
+		= GetCurrentThreadId();
 
 	return
 		ptr_endpoint;
@@ -59,10 +61,12 @@ void
 	__synapse_messaging_route_delete_endpoint
 		(__synapse_messaging_route* pRoute, __synapse_messaging_route_endpoint* pEndpoint)
 {
-	WaitForSingleObject
-		(pEndpoint->rt_endpoint_thread, INFINITE);
-	CloseHandle
-		(pEndpoint->rt_endpoint_thread);
+	if(GetCurrentThreadId() != pEndpoint->rt_endpoint_thread_id) {
+		WaitForSingleObject
+			(pEndpoint->rt_endpoint_thread, INFINITE);
+		CloseHandle
+			(pEndpoint->rt_endpoint_thread);
+	}
 
 	synapse_memory_default_dealloc
 		(pEndpoint->rt_endpoint_identifier, 

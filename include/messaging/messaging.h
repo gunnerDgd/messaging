@@ -2,15 +2,7 @@
 #include <messaging/interface/messaging.h>
 #include <messaging/defines/export/export.h>
 
-synapse_messaging_dll
-	void
-		synapse_messaging_initialize_system
-			();
 
-synapse_messaging_dll
-	void
-		synapse_messaging_cleanup_system
-			();
 
 synapse_messaging_dll
 	synapse_messaging_endpoint

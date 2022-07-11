@@ -1,1 +1,4 @@
-﻿  synapse-messaging-dll.vcxproj -> E:\Programming\C++\Projects\synapse\bin\x64\debug\synapse-messaging-dll.dll
+﻿  messaging.c
+  LINK : program database E:\Programming\C++\Projects\synapse\bin\x64\debug\synapse-messaging-dll.pdb missing; performing full link
+     Creating library E:\Programming\C++\Projects\synapse\bin\x64\debug\synapse-messaging-dll.lib and object E:\Programming\C++\Projects\synapse\bin\x64\debug\synapse-messaging-dll.exp
+  synapse-messaging-dll.vcxproj -> E:\Programming\C++\Projects\synapse\bin\x64\debug\synapse-messaging-dll.dll

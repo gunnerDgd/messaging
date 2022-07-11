@@ -18,12 +18,15 @@ synapse_messaging_dll
 		synapse_messaging_initialize_system
 			()
 {
-	__synapse_messaging_mman_route
-		= synapse_initialize_standard_heap();
+	if(!__synapse_messaging_mman_route)
+		__synapse_messaging_mman_route
+			= synapse_initialize_standard_heap();
 
-	__synapse_messaging_route_object.opaque
-		= __synapse_messaging_route_initialize
-			(__synapse_messaging_mman_route);
+	if(!synapse_messaging_opaque_handle_reference
+			(__synapse_messaging_route_object))
+				__synapse_messaging_route_object.opaque
+					= __synapse_messaging_route_initialize
+							(__synapse_messaging_mman_route);
 }
 
 synapse_messaging_dll
@@ -31,10 +34,19 @@ synapse_messaging_dll
 		synapse_messaging_cleanup_system
 			()
 {
-	__synapse_messaging_route_cleanup
-			(__synapse_messaging_route_object.opaque);
-	synapse_cleanup_standard_heap
-		(__synapse_messaging_mman_route);
+	if(synapse_messaging_opaque_handle_reference
+			(__synapse_messaging_route_object))
+				__synapse_messaging_route_cleanup
+					(synapse_messaging_opaque_handle_reference
+						(__synapse_messaging_route_object));
+
+	if(__synapse_messaging_mman_route)
+		synapse_cleanup_standard_heap
+			(__synapse_messaging_mman_route);
+
+	synapse_messaging_opaque_handle_reference
+		(__synapse_messaging_route_object) = NULL;
+	__synapse_messaging_mman_route = NULL;
 }
 
 synapse_messaging_dll
@@ -52,6 +64,10 @@ synapse_messaging_dll
 		synapse_delete_messaging_endpoint
 			(synapse_messaging_endpoint pEndpoint)
 {
+	if(!synapse_messaging_opaque_handle_reference
+			(pEndpoint))
+				return;
+
 	synapse_messaging_endpoint_cleanup
 		(__synapse_messaging_route_object, pEndpoint);
 }
@@ -103,6 +119,10 @@ synapse_messaging_dll
 		synapse_expire_message
 			(synapse_messaging_message pMessage)
 {
+	if(!synapse_messaging_opaque_handle_reference
+			(pMessage))
+				return;
+
 	synapse_messaging_endpoint_expire_message
 		(__synapse_messaging_route_object,
 			pMessage);
@@ -113,6 +133,10 @@ synapse_messaging_dll
 		synapse_message_data
 			(synapse_messaging_message pMessage)
 {
+	if (!synapse_messaging_opaque_handle_reference
+			(pMessage))
+				return NULL;
+
 	return
 		((__synapse_messaging_message*)pMessage.opaque)
 			->msg_field_ptr;
@@ -123,6 +147,10 @@ synapse_messaging_dll
 		synapse_message_size
 			(synapse_messaging_message pMessage)
 {
+	if(!synapse_messaging_opaque_handle_reference
+			(pMessage))
+				return 0;
+
 	return
 		((__synapse_messaging_message*)pMessage.opaque)
 			->msg_field_size;
@@ -133,6 +161,10 @@ synapse_messaging_dll
 		synapse_message_opcode
 			(synapse_messaging_message pMessage)
 {
+	if(!synapse_messaging_opaque_handle_reference
+			(pMessage))
+				return 0;
+
 	return
 		((__synapse_messaging_message*)pMessage.opaque)
 			->msg_opcode;

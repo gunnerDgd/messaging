@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\synapse\include\synapse\__internal\messaging\init.h" />
     <ClInclude Include="..\..\..\..\include\messaging\messaging.h" />
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +129,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>E:\Programming\C++\Projects\synapse\libs\x64\debug\memory\synapse-memory-mman-dll.lib;E:\Programming\C++\Projects\synapse\libs\x64\debug\messaging\*.lib;synapse-structure-dlist.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>E:\Programming\C++\Projects\synapse\libs\x64\debug\dll_lib\synapse-memory-mman-dll.lib;E:\Programming\C++\Projects\synapse\libs\x64\debug\messaging\*.lib;synapse-structure-dlist.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

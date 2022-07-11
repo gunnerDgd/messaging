@@ -2,12 +2,12 @@
 
 __synapse_messaging_message*
 	__synapse_messaging_message_initialize
-		(synapse_memory_mman_traits* pMman, 
-		 uint16_t					 pMsgOpcode, 
-		 void*						 pMsgField, 
-		 size_t						 pMsgFieldSize)
+		(synapse_memory_manager* pMman,
+		 uint16_t				 pMsgOpcode, 
+		 void*					 pMsgField, 
+		 size_t					 pMsgFieldSize)
 {
-	synapse_memory_mman_block
+	synapse_memory_block
 		hnd_mblock
 			= pMman->allocate
 				(pMman->hnd_mman, NULL, sizeof(__synapse_messaging_message));
@@ -33,7 +33,7 @@ __synapse_messaging_message*
 
 void
 	__synapse_messaging_message_cleanup
-		(synapse_memory_mman_traits* pMman, __synapse_messaging_message* pMessage)
+		(synapse_memory_manager* pMman, __synapse_messaging_message* pMessage)
 {
 	pMman->deallocate
 		(pMman->hnd_mman, pMessage->msg_mman_block);

@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>E:\Programming\C++\Projects\synapse\bin\x64\synapse-messaging-dll.dll</FullPath>
+      <FullPath>E:\Programming\C++\Projects\synapse\bin\x64\debug\synapse-messaging-dll.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

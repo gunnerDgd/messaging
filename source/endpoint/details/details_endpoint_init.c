@@ -2,9 +2,9 @@
 
 __synapse_messaging_endpoint*
 	__synapse_messaging_endpoint_initialize
-		(synapse_memory_mman_traits* pMman)
+		(synapse_memory_manager* pMman)
 {
-	synapse_memory_mman_block
+	synapse_memory_block
 		hnd_block
 			= pMman->allocate
 				(pMman->hnd_mman, NULL, sizeof(__synapse_messaging_endpoint));
@@ -16,8 +16,6 @@ __synapse_messaging_endpoint*
 
 	ptr_endpoint->ep_hnd_mblock
 		= hnd_block;
-	ptr_endpoint->ep_hnd_message_mman
-		= pMman;
 	ptr_endpoint->ep_hnd_message
 		= synapse_structure_double_linked_initialize
 				(pMman);
@@ -41,8 +39,7 @@ void
 		(pEndpoint->ep_hnd_lock);
 	CloseHandle
 		(pEndpoint->ep_hnd_notifier);
+	synapse_structure_double_linked_cleanup
+		(pEndpoint->ep_hnd_message);
 
-	pEndpoint->ep_hnd_message_mman
-		->deallocate_all
-			(pEndpoint->ep_hnd_message_mman->hnd_mman);
 }

@@ -1,5 +1,7 @@
 #pragma once
-#include <messaging/defines/handle/opaque.h>
+#include <synapse/memory/interface/memory_manager.h>
+#include <synapse/messaging/defines/handle/opaque.h>
+
 #include <structure/list/double_linked.h>
 
 #include <Windows.h>
@@ -13,8 +15,6 @@ typedef struct
 
 	synapse_structure_double_linked
 		ep_hnd_message;
-	synapse_memory_mman_traits*
-		ep_hnd_message_mman;
-	synapse_memory_mman_block
+	synapse_memory_block
 		ep_hnd_mblock;
 } __synapse_messaging_endpoint;

@@ -11,8 +11,10 @@ namespace synapse::messaging {
 	class endpoint
 	{
 		friend class message;
-		struct __create_new    { static constexpr int __flag = 0; };
-		struct __retrieve_from { static constexpr int __flag = 1; };
+		struct __create_new    
+					{ static constexpr int __flag = 0; };
+		struct __retrieve_from 
+					{ static constexpr int __flag = 1; };
 	public:
 		using name_type
 				= std::string;

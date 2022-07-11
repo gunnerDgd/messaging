@@ -13,20 +13,20 @@ __synapse_messaging_route_endpoint*
 	__synapse_messaging_route_create_endpoint
 		(__synapse_messaging_route * pRoute, const char* pEndpointName)
 {
-	synapse_memory_mman_block
+	synapse_memory_block
 		hnd_endpoint_route_mblock
-			= pRoute->rt_mman_endpoint->allocate
-					(pRoute->rt_mman_endpoint->hnd_mman, 
+			= pRoute->rt_mman_route->allocate
+					(pRoute->rt_mman_route->hnd_mman, 
 							NULL, sizeof(__synapse_messaging_route_endpoint));
 
 	__synapse_messaging_route_endpoint*
 		ptr_endpoint
-			= pRoute->rt_mman_endpoint->block_pointer
+			= pRoute->rt_mman_route->block_pointer
 					(hnd_endpoint_route_mblock);
 
 	ptr_endpoint->rt_endpoint
 		= __synapse_messaging_endpoint_initialize
-				(synapse_memory_mman_stdheap_initialize_traits());
+				(pRoute->rt_mman_route);
 	ptr_endpoint->rt_endpoint_handle
 		= synapse_structure_double_linked_insert_back
 				(pRoute->rt_handle, &ptr_endpoint, sizeof(__synapse_messaging_route_endpoint*));
@@ -59,10 +59,6 @@ void
 	__synapse_messaging_route_delete_endpoint
 		(__synapse_messaging_route* pRoute, __synapse_messaging_route_endpoint* pEndpoint)
 {
-	synapse_memory_mman_traits*
-		ptr_mman_endpoint
-			= pEndpoint->rt_endpoint->ep_hnd_message_mman;
-
 	WaitForSingleObject
 		(pEndpoint->rt_endpoint_thread, INFINITE);
 	CloseHandle
@@ -74,13 +70,11 @@ void
 
 	__synapse_messaging_endpoint_cleanup
 		(pEndpoint->rt_endpoint);
-	synapse_memory_mman_stdheap_cleanup_traits
-		(ptr_mman_endpoint);
 
 	synapse_structure_double_linked_erase_at
 		(pRoute->rt_handle, pEndpoint->rt_endpoint_handle);
-	pRoute->rt_mman_endpoint->deallocate
-		(pRoute->rt_mman_endpoint->hnd_mman, pEndpoint->rt_endpoint_mblock);
+	pRoute->rt_mman_route->deallocate
+		(pRoute->rt_mman_route->hnd_mman, pEndpoint->rt_endpoint_mblock);
 }
 
 __synapse_messaging_route_endpoint*
@@ -123,7 +117,7 @@ void
 	__synapse_messaging_message*
 		ptr_message
 			= __synapse_messaging_message_initialize
-					(pRoute->rt_mman_message, pMessageOpcode, pMessageField, pMessageFieldSize);
+					(pRoute->rt_mman_route, pMessageOpcode, pMessageField, pMessageFieldSize);
 
 	WaitForSingleObject
 		(pEndpoint->rt_endpoint->ep_hnd_lock, INFINITE);
@@ -167,7 +161,7 @@ void
 	__synapse_messaging_route_expire
 		(__synapse_messaging_route* pRoute, __synapse_messaging_message* pMessage)
 {
-	pRoute->rt_mman_message->deallocate
-		(pRoute->rt_mman_message->hnd_mman,
+	pRoute->rt_mman_route->deallocate
+		(pRoute->rt_mman_route->hnd_mman,
 			pMessage->msg_mman_block);
 }

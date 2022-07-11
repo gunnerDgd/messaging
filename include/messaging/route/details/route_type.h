@@ -1,5 +1,5 @@
 #pragma once
-#include <memory/mman/mman_traits.h>
+#include <synapse/memory/interface/memory_manager.h>
 #include <structure/list/double_linked.h>
 
 #include <messaging/endpoint/details/endpoint_type.h>
@@ -18,7 +18,7 @@ typedef struct
 	size_t
 		rt_endpoint_identifier_length;
 
-	synapse_memory_mman_block
+	synapse_memory_block
 		rt_endpoint_mblock;
 	synapse_structure_double_linked_node
 		rt_endpoint_handle;
@@ -30,9 +30,8 @@ typedef struct
 	synapse_structure_double_linked
 		 rt_handle;
 	
-	synapse_memory_mman_traits
-		*rt_mman_endpoint,
-		*rt_mman_message;
-	synapse_memory_mman_block
+	synapse_memory_manager
+		*rt_mman_route;
+	synapse_memory_block
 		 rt_mblock;
 } __synapse_messaging_route;

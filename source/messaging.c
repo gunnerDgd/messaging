@@ -1,17 +1,15 @@
 #include <messaging/messaging.h>
 
-#include <memory/mman/mman_traits.h>
-#include <memory/mman/standard_heap/stdheap.h>
+#include <synapse/memory/interface/memory_manager.h>
+#include <synapse/memory/standard_heap.h>
 
 #include <messaging/endpoint/endpoint_init.h>
 #include <messaging/endpoint/endpoint_manip.h>
 
 #include <messaging/route/details/route_init.h>
 
-static synapse_memory_mman_traits
-			*__synapse_messaging_mman_endpoint,
-			*__synapse_messaging_mman_message ;
-
+static synapse_memory_manager
+			*__synapse_messaging_mman_route;
 static synapse_messaging_route
 			 __synapse_messaging_route_object;
 
@@ -20,14 +18,12 @@ synapse_messaging_dll
 		synapse_messaging_initialize_system
 			()
 {
-	__synapse_messaging_mman_endpoint
-		= synapse_memory_mman_stdheap_initialize_traits();
-	__synapse_messaging_mman_message
-		= synapse_memory_mman_stdheap_initialize_traits();
+	__synapse_messaging_mman_route
+		= synapse_initialize_standard_heap();
 
 	__synapse_messaging_route_object.opaque
 		= __synapse_messaging_route_initialize
-			(__synapse_messaging_mman_endpoint, __synapse_messaging_mman_message);
+			(__synapse_messaging_mman_route);
 }
 
 synapse_messaging_dll
@@ -37,11 +33,8 @@ synapse_messaging_dll
 {
 	__synapse_messaging_route_cleanup
 			(__synapse_messaging_route_object.opaque);
-
-	synapse_memory_mman_stdheap_cleanup_traits
-		(__synapse_messaging_mman_endpoint);
-	synapse_memory_mman_stdheap_cleanup_traits
-		(__synapse_messaging_mman_message);
+	synapse_cleanup_standard_heap
+		(__synapse_messaging_mman_route);
 }
 
 synapse_messaging_dll

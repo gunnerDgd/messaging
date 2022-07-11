@@ -3,7 +3,7 @@
 
 __synapse_messaging_endpoint*
 	__synapse_messaging_endpoint_initialize
-		(synapse_memory_mman_traits*);
+		(synapse_memory_manager*);
 
 void
 	__synapse_messaging_endpoint_cleanup

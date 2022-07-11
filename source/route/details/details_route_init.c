@@ -2,9 +2,9 @@
 
 __synapse_messaging_route*
 	__synapse_messaging_route_initialize
-		(synapse_memory_mman_traits* pMmanRoute, synapse_memory_mman_traits* pMmanMessage)
+		(synapse_memory_manager* pMmanRoute)
 {
-	synapse_memory_mman_block
+	synapse_memory_block
 		hnd_block
 			= pMmanRoute->allocate
 					(pMmanRoute->hnd_mman, NULL, sizeof(__synapse_messaging_route));
@@ -14,13 +14,11 @@ __synapse_messaging_route*
 			= pMmanRoute->block_pointer
 					(hnd_block);
 
-	ptr_route->rt_mman_endpoint
-		= pMmanRoute;
-	ptr_route->rt_mman_message
-		= pMmanMessage;
-
 	ptr_route->rt_mblock
 		= hnd_block;
+	ptr_route->rt_mman_route
+		= pMmanRoute;
+
 	ptr_route->rt_handle
 		= synapse_structure_double_linked_initialize
 				(pMmanRoute);
@@ -53,8 +51,8 @@ void
 			(ptr_endpoint->rt_endpoint_thread);
 	}
 
-	pRoute->rt_mman_message->deallocate_all
-			(pRoute->rt_mman_message->hnd_mman);
-	pRoute->rt_mman_endpoint->deallocate_all
-			(pRoute->rt_mman_endpoint->hnd_mman);
+	synapse_structure_double_linked_cleanup
+		(pRoute->rt_handle);
+	pRoute->rt_mman_route->deallocate
+		(pRoute->rt_mman_route->hnd_mman, pRoute->rt_mblock);
 }

@@ -22,6 +22,10 @@ __synapse_messaging_route*
 	ptr_route->rt_handle
 		= synapse_structure_double_linked_initialize
 				(pMmanRoute);
+	ptr_route->rt_thread_lock
+		= CreateMutex(NULL, TRUE, NULL);
+	ptr_route->rt_thread_id
+		= GetCurrentThreadId();
 
 	return
 		ptr_route;
@@ -32,9 +36,15 @@ void
 		(__synapse_messaging_route* pRoute)
 {
 	synapse_structure_double_linked_node
-		ptr_terminate
-			= synapse_structure_double_linked_node_begin
-					(pRoute->rt_handle);
+		ptr_terminate;
+
+	if(GetCurrentThreadId()
+			!= pRoute->rt_thread_id)
+					return;
+
+	ptr_terminate
+		= synapse_structure_double_linked_node_begin
+				(pRoute->rt_handle);
 
 	for ( ; ptr_terminate.opaque
 		  ; ptr_terminate = synapse_structure_double_linked_node_next(ptr_terminate))

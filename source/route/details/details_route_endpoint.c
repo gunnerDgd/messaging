@@ -14,15 +14,20 @@ __synapse_messaging_route_endpoint*
 		(__synapse_messaging_route * pRoute, const char* pEndpointName)
 {
 	synapse_memory_block
-		hnd_endpoint_route_mblock
-			= pRoute->rt_mman_route->allocate
-					(pRoute->rt_mman_route->hnd_mman, 
-							NULL, sizeof(__synapse_messaging_route_endpoint));
-
+		hnd_endpoint_route_mblock;
 	__synapse_messaging_route_endpoint*
-		ptr_endpoint
-			= pRoute->rt_mman_route->block_pointer
-					(hnd_endpoint_route_mblock);
+		ptr_endpoint;
+
+	WaitForSingleObject
+		(pRoute->rt_thread_lock, INFINITE);
+		
+	hnd_endpoint_route_mblock
+		= pRoute->rt_mman_route->allocate
+				(pRoute->rt_mman_route->hnd_mman, 
+						NULL, sizeof(__synapse_messaging_route_endpoint));
+	ptr_endpoint
+		= pRoute->rt_mman_route->block_pointer
+				(hnd_endpoint_route_mblock);
 
 	ptr_endpoint->rt_endpoint
 		= __synapse_messaging_endpoint_initialize
@@ -53,6 +58,9 @@ __synapse_messaging_route_endpoint*
 	ptr_endpoint->rt_endpoint_thread_id
 		= GetCurrentThreadId();
 
+	ReleaseMutex
+		(pRoute->rt_thread_lock);
+
 	return
 		ptr_endpoint;
 }
@@ -68,6 +76,9 @@ void
 			(pEndpoint->rt_endpoint_thread);
 	}
 
+	WaitForSingleObject
+		(pRoute->rt_thread_lock, INFINITE);
+
 	synapse_memory_default_dealloc
 		(pEndpoint->rt_endpoint_identifier, 
 			pEndpoint->rt_endpoint_identifier_length);
@@ -79,6 +90,9 @@ void
 		(pRoute->rt_handle, pEndpoint->rt_endpoint_handle);
 	pRoute->rt_mman_route->deallocate
 		(pRoute->rt_mman_route->hnd_mman, pEndpoint->rt_endpoint_mblock);
+
+	ReleaseMutex
+		(pRoute->rt_thread_lock);
 }
 
 __synapse_messaging_route_endpoint*
@@ -86,9 +100,14 @@ __synapse_messaging_route_endpoint*
 		(__synapse_messaging_route* pRoute, const char* pName)
 {
 	synapse_structure_double_linked_node
-		ptr_seek
-			= synapse_structure_double_linked_node_begin
-					(pRoute->rt_handle);
+		ptr_seek;
+	
+	WaitForSingleObject
+		(pRoute->rt_thread_lock, INFINITE);
+
+	ptr_seek
+		= synapse_structure_double_linked_node_begin
+				(pRoute->rt_handle);
 
 	for( ; ptr_seek.opaque
 		 ; ptr_seek = synapse_structure_double_linked_node_next(ptr_seek))
@@ -102,11 +121,16 @@ __synapse_messaging_route_endpoint*
 		if (!ptr_endpoint->rt_endpoint_identifier)
 			continue;
 		if(strcmp
-				(ptr_endpoint->rt_endpoint_identifier, pName) == 0)
+				(ptr_endpoint->rt_endpoint_identifier, pName) == 0) {
+			ReleaseMutex
+				(pRoute->rt_thread_lock);
 			return
 				ptr_endpoint;
+		}
 	}
 
+	ReleaseMutex
+			(pRoute->rt_thread_lock);
 	return NULL;
 }
 

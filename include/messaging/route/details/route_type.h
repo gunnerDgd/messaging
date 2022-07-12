@@ -36,4 +36,9 @@ typedef struct
 		*rt_mman_route;
 	synapse_memory_block
 		 rt_mblock;
+
+	HANDLE
+		 rt_thread_lock;
+	DWORD
+		 rt_thread_id;
 } __synapse_messaging_route;

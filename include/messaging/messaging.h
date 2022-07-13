@@ -2,8 +2,6 @@
 #include <messaging/interface/messaging.h>
 #include <messaging/defines/export/export.h>
 
-
-
 synapse_messaging_dll
 	synapse_messaging_endpoint
 		synapse_create_messaging_endpoint

@@ -25,6 +25,15 @@ target_include_directories(
 )
 
 target_link_libraries(
-    synapse_messaging_dll,
+    synapse_messaging_dll
     synapse_memory_dll
+)
+
+add_dependencies(
+    synapse_modules_dll
+    synapse_memory_dll
+)
+
+target_compile_options(
+    synapse_modules_dll PRIVATE /Dsynapse_messaging_export_mode
 )

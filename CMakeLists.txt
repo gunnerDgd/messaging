@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.0)
 
 project(
     synapse-messaging
@@ -8,3 +8,4 @@ project(
 )
 
 add_subdirectory(source/c)
+add_subdirectory(source/cpp)

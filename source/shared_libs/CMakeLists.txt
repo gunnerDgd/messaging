@@ -23,3 +23,8 @@ target_include_directories(
     PUBLIC
     ${CMAKE_SOURCE_DIR}/include
 )
+
+target_link_libraries(
+    synapse_messaging_dll,
+    synapse_memory_dll
+)

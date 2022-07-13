@@ -1,7 +1,7 @@
 #include <messaging/endpoint/endpoint_init.h>
 #include <messaging/route/details/route_endpoint.h>
 
-#include <memory/mman/standard_heap/stdheap.h>
+#include <synapse/memory/standard_heap.h>
 #include <stdio.h>
 synapse_messaging_endpoint
 	synapse_messaging_endpoint_initialize

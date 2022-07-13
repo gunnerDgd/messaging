@@ -28,3 +28,9 @@ target_include_directories(
     PUBLIC
     ${CMAKE_SOURCE_DIR}/include
 )
+
+target_compile_options(
+  synapse_messaging_lib_cpp
+  PUBLIC
+  /std:c++17
+)

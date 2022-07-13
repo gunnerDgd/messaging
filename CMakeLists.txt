@@ -9,3 +9,4 @@ project(
 
 add_subdirectory(source/c)
 add_subdirectory(source/cpp)
+add_subdirectory(source/shared_libs)
